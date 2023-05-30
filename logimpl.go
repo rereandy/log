@@ -17,7 +17,7 @@ type ReLogger struct {
 	logger *logrus.Entry
 }
 
-var DaprVersion = "unknown"
+var Version = "unknown"
 
 func newReLogger(name string) *ReLogger {
 	newLogger := logrus.New()
@@ -57,7 +57,7 @@ func (l *ReLogger) EnableJSONOutput(enabled bool) {
 		logFieldScope:    l.logger.Data[logFieldScope],
 		logFieldType:     LogTypeLog,
 		logFieldInstance: hostname,
-		logFieldDaprVer:  DaprVersion,
+		logFieldDaprVer:  Version,
 	}
 
 	if enabled {
