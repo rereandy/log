@@ -2,6 +2,7 @@ package log
 
 import (
 	"io"
+	"log"
 	"os"
 	"time"
 
@@ -20,7 +21,11 @@ var DaprVersion = "unknown"
 
 func newReLogger(name string) *ReLogger {
 	newLogger := logrus.New()
-	newLogger.SetOutput(os.Stdout)
+	file, err := os.OpenFile(name+".log", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		newLogger.SetOutput(os.Stdout)
+	}
+	log.SetOutput(file)
 
 	dl := &ReLogger{
 		name: name,
